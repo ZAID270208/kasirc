@@ -1,0 +1,356 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #3498db;
+    --danger-color: #e74c3c;
+    --text-color: #2c3e50;
+    --bg-color: #f0f4f8;
+    --white: #ffffff;
+    --shadow: 0 4px 6px hsla(246, 73%, 44%, 0.941);
+    --border-radius: 10px;
+    --font-color: #333; /* Warna font default */
+    --header-bg: hsla(0, 0%, 100%, 0.998); /* Background header */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background gradient */
+.container {
+    background: linear-gradient(to bottom right, hsl(228, 70%, 65%), #e0e0e0);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+/* Animasi untuk elemen interaktif */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.menu, .keranjang, #struk {
+    animation: fadeIn 0.3s ease-out;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.menu:hover, .keranjang:hover, #struk:hover {
+    transform: translateY(-2px);
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    background-color: var(--header-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+}
+
+h2 {
+    color: var(--secondary-color);
+    margin-top: 0;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Tabel styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0px;
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.total {
+    font-weight: bold;
+    text-align: right;
+    font-size: 1.2em;
+    margin-top: 20px;
+    color: var(--text-color);
+}
+
+/* Responsif untuk mobile */
+@media screen and (max-width: 768px) {
+    button {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.popup-content {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: var(--shadow);
+    margin: 20px auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: center; /* Center text */
+}
+
+.close-popup {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #e74c3c;
+    color: var(--white);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-popup:hover {
+    background-color: #c0392b;
+    transform: scale(1.1);
+}
+
+.continue-shopping-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 15px; /* Add margin for spacing */
+}
+
+.continue-shopping-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Responsif untuk mobile */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        overflow-y: auto;
+    }
+
+    .popup-content {
+        margin: 10px;
+        max-height: 80vh;
+    }
+
+    button {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+
+.popup input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.popup button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #2980b9;
+}
+
+/* Tambahkan style untuk container utama */
+.container {
+    min-height: 100vh;
+    position: relative;
+    overflow-y: auto;
+    padding-bottom: 60px;
+}
+
+/* Perbaikan untuk tabel */
+.keranjang table, #struk table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.popup-buttons button {
+    min-width: 120px;
+    padding: 12px 20px;
+}
+
+.download-btn, .cancel-btn {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Tambahkan ini untuk mengatur warna font pada tabel */
+table th, table td {
+    color: #2c3e50; /* Warna font untuk semua teks dalam tabel */
+}
+
+table th {
+    color: var(--white); /* Warna font untuk header tabel */
+}
+
+table td {
+    color: #2980b9; /* Warna font untuk data tabel */
+}
+
+/* Tambahkan warna untuk total */
+.total {
+    color: #e74c3c; /* Warna merah untuk total */
+}
+
+/* Animasi untuk input */
+input[type="text"],
+input[type="number"] {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: calc(100% - 22px); /* Menghindari overflow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Animasi untuk tombol */
+button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Animasi untuk tombol saat diklik */
+button:active {
+    transform: translateY(1px) scale(0.95); /* Efek scale saat diklik */
+}
+
+/* Animasi untuk form */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#tambahBarangForm {
+    animation: fadeIn 0.5s ease-out; /* Tambahkan animasi fade-in */
+}
