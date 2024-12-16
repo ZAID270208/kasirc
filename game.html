@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="coba.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Toko Zaid</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: url('i.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #333;
+            min-height: 100vh;
+            position: relative;
+            overflow-y: visible;
+        }
+
+        /* Tambahkan overlay untuk background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: -1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .menu {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .menu h2 {
+            color: #3498db;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .keranjang {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            word-wrap: break-word;
+            min-width: 100px;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .total {
+            font-weight: bold;
+            text-align: right;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+        #struk {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #struk h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        /* Tambahkan ini untuk memberikan efek overlay agar konten lebih mudah dibaca */
+        .menu, .keranjang, #struk {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Tambahkan CSS untuk responsivitas mobile */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+                max-width: 100%;
+                overflow-y: visible;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                padding: 15px;
+            }
+
+            .menu, .keranjang, #struk {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            table {
+                display: table;
+                width: 100%;
+                min-width: 500px;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+                min-width: auto;
+            }
+
+            button {
+                padding: 15px;
+                margin-bottom: 8px;
+                font-size: 1em;
+                touch-action: manipulation;
+            }
+
+            .popup-content {
+                width: 90%;
+                max-width: 350px;
+                margin: 20px;
+            }
+
+            .container {
+                padding-bottom: 40px;
+            }
+        }
+
+        /* Tambahkan style untuk active state pada button */
+        button:active {
+            background-color: #2070a0;
+            transform: translateY(1px);
+        }
+
+        /* Perbaikan untuk popup di mobile */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 350px;
+            position: relative;
+            margin: 20px auto;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Tambahkan notifikasi styling */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            z-index: 1001;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification.success {
+            background-color: #2ecc71;
+        }
+
+        .notification.error {
+            background-color: #e74c3c;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .keranjang table, #struk table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        /* Styling untuk popup download */
+        .download-popup {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            background-color: #2ecc71;
+            padding: 12px 20px;
+        }
+
+        .cancel-btn {
+            background-color: #95a5a6;
+            padding: 12px 20px;
+        }
+
+        .download-btn:hover {
+            background-color: #27ae60;
+        }
+
+        .cancel-btn:hover {
+            background-color: #7f8c8d;
+        }
+
+        /* Perbaikan untuk tabel */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            word-wrap: break-word;
+            min-width: 100px;
+        }
+
+        /* Atur lebar kolom spesifik */
+        th:nth-child(1), td:nth-child(1) {
+            width: 10%;
+        }
+        
+        th:nth-child(2), td:nth-child(2) {
+            width: 30%;
+        }
+        
+        th:nth-child(3), td:nth-child(3) {
+            width: 20%;
+        }
+        
+        th:nth-child(4), td:nth-child(4) {
+            width: 15%;
+        }
+        
+        th:nth-child(5), td:nth-child(5) {
+            width: 25%;
+        }
+
+        /* Perbaikan untuk container tabel */
+        .keranjang, #struk {
+            overflow-x: auto;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Responsif untuk mobile */
+        @media screen and (max-width: 768px) {
+            table {
+                display: table;
+                width: 100%;
+                min-width: 500px;
+            }
+
+            .keranjang, #struk {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+                min-width: auto;
+            }
+        }
+
+        /* Styling untuk popup selamat datang */
+        .welcome-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none; /* Sembunyikan popup secara default */
+        }
+
+        .welcome-popup h2 {
+            margin: 0;
+            color: #3498db;
+        }
+
+        .close-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Hiasan pinggir halaman */
+        .container {
+            position: relative;
+            padding: 20px;
+            border: 20px solid #3498db; /* Border di pinggir */
+            border-radius: 15px; /* Membuat sudut border melengkung */
+            background-color: rgba(255, 255, 255, 0.9); /* Latar belakang transparan */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Bayangan untuk efek kedalaman */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TOKO ZAID!</h1>
+        
+        <!-- Popup Selamat Datang -->
+        <div class="welcome-popup" id="welcomePopup">
+            <h2>Selamat Datang di Toko Zaid!</h2>
+            <p>Temukan barang-barang terbaik untuk kebutuhan Anda.</p>
+            <button class="close-btn" onclick="tutupPopup()">Tutup</button>
+        </div>
+
+        <div class="menu">
+            <h2>MENU UTAMA</h2>
+            <button onclick="tambahBarang()">1. Tambah barang ke keranjang kamu</button>
+            <button onclick="lihatKeranjang()">2. Lihat keranjang kamu</button>
+            <button onclick="hapusBarang()">3. Hapus barang dari keranjang kamu</button>
+            <button onclick="selesaiBelanja()">4. Selesai belanja</button>
+        </div>
+
+        <div class="keranjang" id="keranjang">
+            <!-- Isi keranjang akan ditampilkan di sini -->
+        </div>
+
+        <div id="struk" style="display: none;">
+            <h2>Struk Belanja</h2>
+            <button onclick="exportToPDF()" class="export-btn">
+                <i class="fas fa-file-pdf"></i> Export ke PDF
+            </button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>BARANG</th>
+                        <th>HARGA</th>
+                        <th>JUMLAH</th>
+                        <th>TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="strukBody">
+                    <!-- Isi struk akan ditampilkan di sini -->
+                </tbody>
+            </table>
+            <p class="total" id="totalHarga"></p>
+        </div>
+    </div>
+
+    <script>
+        // Menampilkan popup selamat datang saat halaman dimuat
+        window.onload = function() {
+            document.getElementById("welcomePopup").style.display = "block";
+        }
+
+        function tutupPopup() {
+            document.getElementById("welcomePopup").style.display = "none";
+        }
+
+        function tambahBarang() {
+            // Logika untuk menambah barang ke keranjang
+            // ...
+
+            // Tampilkan notifikasi
+            tampilkanNotifikasi("Barang berhasil ditambahkan ke keranjang!");
+        }
+
+        function tampilkanNotifikasi(pesan) {
+            const notification = document.createElement("div");
+            notification.className = "notification";
+            notification.innerText = pesan;
+            document.body.appendChild(notification);
+
+            // Tampilkan notifikasi
+            notification.style.display = "block";
+
+            // Hapus notifikasi setelah 3 detik
+            setTimeout(() => {
+                notification.style.display = "none";
+                document.body.removeChild(notification);
+            }, 3000);
+        }
+    </script>
+    <script src="script.js"></script>
+
+</body>
+
+<!-- Tambahkan ini di akhir body -->
+</html>
